@@ -148,3 +148,33 @@ ylabel('Latitude (^oN)', 'FontSize', 20) % Naming the y-axis
 title('RF13 Ethane Concentrations with Feedlot Locations', 'FontSize', 30); % Providing a title
 grid on % Turning on major grid
 grid minor  % Turning on minor grid
+
+
+%% 
+% Figure 7
+    % Potential temperature versus mean sea level altitude of the aircraft
+desc_top = 1190; % Top of the initial descent
+desc_bottom = 1700; % Bottom of the inital descent
+% Potnetial Temperature = Temperature * (reference pressure/pressure)^(dry air gas constant/specific heat at a constant pressure)
+theta = (trf+273.15) .* ((1000 ./ ps_hads_a) .^ (287/1004)); % Calculating potential temperature [K]
+
+figure
+line(theta(desc_top:desc_bottom), avzmsl(desc_top:desc_bottom), 'Color', 'k', 'LineWidth', 2) % Creating a line plot - potential tempeature=x-axis, mean sea level altitude-y-axis, colored black
+set(gca, 'FontSize', 20) % Setting the font size of the number
+xlabel('Potential Temperature (K)', 'FontSize', 20) % Naming the x-axis
+ylabel('Mean Sea Level Altitude (m)', 'FontSize', 20) % Naming the y-axis
+title('RF13 Potential Temperature', 'FontSize', 30) % Providing a title
+grid on % Turning on major grid
+grid minor % Turning on minor grid
+
+%% 
+% Figure 8
+    % Potential temperature versus mean sea level altitude of the aircraft
+figure
+line(theta, avzmsl, 'Color', 'k', 'LineWidth', 2) % Creating a line plot - potential tempeature=x-axis, mean sea level altitude-y-axis, colored black
+set(gca, 'FontSize', 20) % Setting the font size of the number
+xlabel('Potential Temperature (K)', 'FontSize', 20) % Naming the x-axis
+ylabel('Mean Sea Level Altitude (m)', 'FontSize', 20) % Naming the y-axis
+title('RF13 Potential Temperature', 'FontSize', 30) % Providing a title
+grid on % Turning on major grid
+grid minor % Turning on minor grid
