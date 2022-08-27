@@ -149,14 +149,25 @@ title('RF13 Ethane Concentrations with Feedlot Locations', 'FontSize', 30); % Pr
 grid on % Turning on major grid
 grid minor  % Turning on minor grid
 
-
-%% 
-% Figure 7
-    % Potential temperature versus mean sea level altitude of the aircraft
+%% Calculating potential temperature
 desc_top = 1190; % Top of the initial descent
 desc_bottom = 1700; % Bottom of the inital descent
 % Potnetial Temperature = Temperature * (reference pressure/pressure)^(dry air gas constant/specific heat at a constant pressure)
 theta = (trf+273.15) .* ((1000 ./ ps_hads_a) .^ (287/1004)); % Calculating potential temperature [K]
+
+%% Figure 7
+    % Potential temperature versus mean sea level altitude of the aircraft
+figure
+line(theta, avzmsl, 'Color', 'k', 'LineWidth', 2) % Creating a line plot - potential tempeature=x-axis, mean sea level altitude-y-axis, colored black
+set(gca, 'FontSize', 20) % Setting the font size of the number
+xlabel('Potential Temperature (K)', 'FontSize', 20) % Naming the x-axis
+ylabel('Mean Sea Level Altitude (m)', 'FontSize', 20) % Naming the y-axis
+title('RF13 Potential Temperature', 'FontSize', 30) % Providing a title
+grid on % Turning on major grid
+grid minor % Turning on minor grid
+
+%% Figure 8
+    % Potential temperature versus mean sea level altitude of the aircraft
 
 figure
 line(theta(desc_top:desc_bottom), avzmsl(desc_top:desc_bottom), 'Color', 'k', 'LineWidth', 2) % Creating a line plot - potential tempeature=x-axis, mean sea level altitude-y-axis, colored black
@@ -167,14 +178,127 @@ title('RF13 Potential Temperature', 'FontSize', 30) % Providing a title
 grid on % Turning on major grid
 grid minor % Turning on minor grid
 
-%% 
-% Figure 8
-    % Potential temperature versus mean sea level altitude of the aircraft
+%% Figure 9
+    % Water vapor mixing ratio versus mean sea level altitude of the
+    % aircraft
+
 figure
-line(theta, avzmsl, 'Color', 'k', 'LineWidth', 2) % Creating a line plot - potential tempeature=x-axis, mean sea level altitude-y-axis, colored black
-set(gca, 'FontSize', 20) % Setting the font size of the number
-xlabel('Potential Temperature (K)', 'FontSize', 20) % Naming the x-axis
+line(H2O, avzmsl, 'Color', 'k', 'LineWidth', 2) % Creating a line plot - water vapor mixing ratio=x-axis, mean sea level altitude=y-axis, colored black
+set(gca, 'FontSize', 20)% Setting the font size of the numbers
+xlabel('Water Vapor Mixing Ratio (ppb)', 'FontSize', 20) % Naming the x-axis
+ylabel('Mean Sea LEvel Altitude (m)', 'FontSize', 20) % Naming the y-axis
+title('RF13 Water Vapor Mixing Ratio', 'FontSize', 30) % Providing a title
+grid on % Turning on major grid
+grid minor % Turning on minor grid
+
+%% Figure 10
+    % Water vapor mixing ratio versus mean sea level altitude of the
+    % aircraft
+
+figure
+line(H2O(desc_top:desc_bottom), avzmsl(desc_top:desc_bottom), 'Color', 'k', 'LineWidth', 2) % Creating a line plot - water vapor mixing ratio=x-axis, mean sea level altitude=y-axis, colored black
+set(gca, 'FontSize', 20)% Setting the font size of the numbers
+xlabel('Water Vapor Mixing Ratio (ppb)', 'FontSize', 20) % Naming the x-axis
 ylabel('Mean Sea Level Altitude (m)', 'FontSize', 20) % Naming the y-axis
-title('RF13 Potential Temperature', 'FontSize', 30) % Providing a title
+title('RF13 Water Vapor Mixing Ratio', 'FontSize', 30) % Providing a title
+grid on % Turning on major grid
+grid minor % Turning on minor grid
+
+%% Figure 11
+    % Potential temperature and water vapor mixing ratio versus mean sea
+    % level altitude of the aircraft
+
+figure
+p1 = line(theta(desc_top:desc_bottom), avzmsl(desc_top:desc_bottom), 'Color', 'k', 'DisplayName', 'Potential Temperature', 'LineWidth', 2); % Creating a line plot - potential tempeature=x-axis, mean sea level altitude-y-axis, colored black
+ax1 = gca; % Setting the current axis
+ax1.XColor = 'k'; % Setting the color of the bottom x-axis to black
+ax1.YColor = 'k'; % Setting the color of the y-axis to black
+set(ax1, 'FontSize', 20) % Setting the font size of the numbers
+set(ax1, 'yticklabel', []) % Gets rid of the y-axis numbering
+set(ax1, 'ytick', []) % Gets rid of the y-axis ticks
+xlabel('Potential Temperature (K)', 'FontSize', 20) % Naming the bottom x-axis
+hold on
+ax1_pos = ax1.Position; % Assigns the position of the first axis
+ax2 = axes('Position', ax1_pos, 'XAxisLocation', 'top', 'Color', 'none'); % Stating the location of the second axis
+p2 = line(H2O(desc_top:desc_bottom), avzmsl(desc_top:desc_bottom), 'Color', 'b', 'DisplayName', 'Water Vapor Mixing ratio', 'LineWidth', 2); % Creating a line plot - water vapor mixing ratio=x-axis, mean sea level altitude=y-axis, colored blue
+ax2.XColor = 'b'; % Setting the color of the top x-axis to blue
+set(ax2, 'FontSize', 20) % Setting the font size of numbers
+xlabel('Water Vapor Mixing Ratio (ppb)', 'FontSize', 20) % Naming the top x-axis
+ylabel('Mean Sea Level Altitude (m)', 'FontSize', 20) % Naming the y-axis
+legend([p1,p2])
+grid on % Turning on major grid
+grid minor % Turning on minor grid
+
+%% Figure 12
+    % Methane concentration versus mean sea level altitude of the aircraft
+
+figure 
+scatter(CH4, avzmsl, 'k', 'filled') % Creating a line plot - methane concentration = x-axis, mean sea level altitude = y-axis, filled
+set(gca, 'FontSize', 20)% Setting the font size of the numbers
+xlabel('Methane (ppb)', 'FontSize', 20) % Naming the x-axis
+ylabel('Mean Sea Level Altitude (m)', 'FontSize', 20) % Naming the y-axis
+title('RF13 Methane Concentration', 'FontSize', 30) % Providing a title
+grid on % Turning on major grid
+grid minor % Turning on minor grid
+
+%% Figure 13
+    % Methane concentration versus mean sea level altitude of the aircraft
+
+figure
+line(CH4(desc_top:desc_bottom), avzmsl(desc_top:desc_bottom), 'Color', 'k', 'LineWidth', 2) % Creating a line plot - methane=x-axis, mean sea level altitude=y-axis, colored black
+set(gca, 'FontSize', 20)% Setting the font size of the numbers
+xlabel('Methane (ppb)', 'FontSize', 20) % Naming the x-axis
+ylabel('Mean Sea Level Altitude (m)', 'FontSize', 20) % Naming the y-axis
+title('RF13 Methane Concentration', 'FontSize', 30) % Providing a title
+grid on % Turning on major grid
+grid minor % Turning on minor grid
+
+%% Figure 14
+    % Potential temperature and methane concentration versus mean sea level
+    % altitude of aircraft
+ 
+figure
+p1 = line(theta(desc_top:desc_bottom), avzmsl(desc_top:desc_bottom), 'Color', 'k', 'DisplayName', 'Potential Temperature', 'LineWidth', 2); % Creating a line plot - potential tempeature=x-axis, mean sea level altitude-y-axis, colored black
+ax1 = gca; % Setting the current axis
+ax1.XColor = 'k'; % Setting the color of the bottom x-axis to black
+ax1.YColor = 'k'; % Setting the color of the y-axis to black
+set(ax1, 'FontSize', 20) % Setting the font size of the numbers
+set(ax1, 'yticklabel', []) % Gets rid of the y-axis numbering
+set(ax1, 'ytick', []) % Gets rid of the y-axis ticks
+xlabel('Potential Temperature (K)', 'FontSize', 20) % Naming the bottom x-axis
+hold on
+ax1_pos = ax1.Position; % Assigns the position of the first axis
+ax2 = axes('Position', ax1_pos, 'XAxisLocation', 'top', 'Color', 'none'); % Stating the location of the second axis
+p2 = line(CH4(desc_top:desc_bottom), avzmsl(desc_top:desc_bottom), 'Color', 'r', 'DisplayName', 'Methane', 'LineWidth', 2); % Creating a line plot - methane concentration=x-axis, mean sea level altitude=y-axis, colored blue
+ax2.XColor = 'r'; % Setting the color of the top x-axis to red
+set(ax2, 'FontSize', 20) % Setting the font size of numbers
+xlabel('Methane (ppb)', 'FontSize', 20) % Naming the top x-axis
+ylabel('Mean Sea Level Altitude (m)', 'FontSize', 20) % Naming the y-axis
+legend([p1,p2])
+grid on % Turning on major grid
+grid minor % Turning on minor grid
+
+%% Figure 15
+    % Water vapor mixing ratio and methane concentration versus mean sea
+    % level altitude of aircraft
+
+figure
+p1 = line(H2O(desc_top:desc_bottom), avzmsl(desc_top:desc_bottom), 'Color', 'b', 'DisplayName', 'Water Vapor Mixing ratio', 'LineWidth', 2); % Creating a line plot - water vapor mixing ratio=x-axis, mean sea level altitude=y-axis, colored blue
+ax1 = gca; % Setting the current axis
+ax1.XColor = 'b'; % Setting the color of the bottom x-axis to black
+ax1.YColor = 'k'; % Setting the color of the y-axis to black
+set(ax1, 'FontSize', 20) % Setting the font size of the numbers
+set(ax1, 'yticklabel', []) % Gets rid of the y-axis numbering
+set(ax1, 'ytick', []) % Gets rid of the y-axis ticks
+xlabel('Water Vapor Mixing Ratio (ppb)', 'FontSize', 20) % Naming the bottom x-axis
+hold on
+ax1_pos = ax1.Position; % Assigns the position of the first axis
+ax2 = axes('Position', ax1_pos, 'XAxisLocation', 'top', 'Color', 'none'); % Stating the location of the second axis
+p2 = line(CH4(desc_top:desc_bottom), avzmsl(desc_top:desc_bottom), 'Color', 'r', 'DisplayName', 'Methane', 'LineWidth', 2); % Creating a line plot - methane concentration=x-axis, mean sea level altitude=y-axis, colored blue
+ax2.XColor = 'r'; % Setting the color of the top x-axis to red
+set(ax2, 'FontSize', 20) % Setting the font size of numbers
+xlabel('Methane (ppb)', 'FontSize', 20) % Naming the top x-axis
+ylabel('Mean Sea Level Altitude (m)', 'FontSize', 20) % Naming the y-axis
+legend([p1,p2])
 grid on % Turning on major grid
 grid minor % Turning on minor grid
