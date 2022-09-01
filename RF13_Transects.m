@@ -105,6 +105,23 @@ trans2_h_end = 4715; % Index value of the end of the transect leg at 2,272 m
 trans2_i_start = 4758; % Index value of the start of the transect leg at 2,368 m
 trans2_i_end = 4835; % Index value of the end of the transect leg at 2,272 m
 
+%-----------------------------------------------------------------------
+% Leg 1 of third transect
+trans3_a_start = 6258; % Index value of the start of the transect leg at
+trans3_a_end = 6376; % Index value of the end of the transect leg at
+
+% Leg 2 of the third transect
+trans3_b_start = 6400; % Index value of the start of the transect leg at
+trans3_b_end = 6535; % Index value of the end of the transect leg at
+
+% Leg 3 of the third transect
+trans3_c_start = 6581; % Index value of the start of the transect leg at
+trans3_c_end = 6711; % Index value of the end of the transect leg at
+
+% Leg 4 of the third transect
+trans3_d_start = 6733; % Index value of the start of the transect leg at
+trans3_d_end = 6877; % Index value of the end of the transect leg at
+
 %% Figure 2
     % Flight path colored by methane concentration with transects
 
@@ -135,6 +152,11 @@ scatter(av_long(trans2_f_start:trans2_f_end), av_lat(trans2_f_start:trans2_f_end
 scatter(av_long(trans2_g_start:trans2_g_end), av_lat(trans2_g_start:trans2_g_end), 10, 'MarkerEdgeColor', [0.8500 0.3250 0.1250], 'MarkerFaceColor', [0.8500 0.3250 0.1250]); % Orange
 scatter(av_long(trans2_h_start:trans2_h_end), av_lat(trans2_h_start:trans2_h_end), 10, 'MarkerEdgeColor', [0.4940 0.1840 0.5560], 'MarkerFaceColor', [0.4940 0.1840 0.5560]); % Purple
 scatter(av_long(trans2_i_start:trans2_i_end), av_lat(trans2_i_start:trans2_i_end), 10, 'MarkerEdgeColor', [0.4660 0.6740 0.1880], 'MarkerFaceColor', [0.4660 0.6740 0.1880]); % Green
+% Transect 3
+%scatter(av_long(trans3_a_start:trans3_a_end), av_lat(trans3_a_start:trans3_a_end), 10, 'r', 'filled');
+%scatter(av_long(trans3_b_start:trans3_b_end), av_lat(trans3_b_start:trans3_b_end), 10, 'g', 'filled');
+%scatter(av_long(trans3_c_start:trans3_c_end), av_lat(trans3_c_start:trans3_c_end), 10, 'k', 'filled');
+scatter(av_long(trans3_d_start:trans3_d_end), av_lat(trans3_d_start:trans3_d_end), 10, 'm', 'filled');
 hold off
 xlabel('Longitude (^oE)', 'FontSize', 20) % Naming the x-axis
 ylabel('Latitude (^oN)', 'FontSize', 20) % Naming the y-axis
