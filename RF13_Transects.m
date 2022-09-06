@@ -5,6 +5,16 @@
     % UWKA took off from Laramie, WY
 % Created on August 29, 2022 by Katie Steinmann
 % Edits
+    % August 29, 2022 - Read in files; Collected data; Identified transect
+    % 1, leg A, B, and C
+    % August 30, 2022 - Indentified transectg 1, leg D and E. Indetified
+    % transect 1, leg A, B, C, D, E, F, G, H, and I
+    % August 31, 2022 - Created plot 2 with transects 1 and 2; Updated legs
+    % for transects 1 and 2
+    % September 1, 2022 - Identified legs 1, 2, 3, and 4 of the third
+    % transect
+    % September 6, 2022 - Identified legs 5 and 6 of the third transect;
+    % Identified all legs of the fourth and fifth transect; Added feedlot locations to figure 2 
 
 %% Reading in the necessary files
 
@@ -29,9 +39,10 @@ H2O = Picarro.H2O; % Reading in water vapor mixing ratio [ppb]
 
 %% Figure 1
     % Flight path colored by methane concentration
+    % Plot used to identify transect locations
 
-start = 3040; % Beginning of feedlot sampling
-done = 3126; % End of feelot sampling
+start = 1700; % Beginning of feedlot sampling
+done = 10700; % End of feelot sampling
 
 figure
 scatter(av_long(start:done), av_lat(start:done), 5, CH4(start:done), 'filled') % Creating a scatter plot - longitude=x-coordinates, latitude=y-corrdinates, dot size, variable to color by, type of dot
@@ -122,6 +133,64 @@ trans3_c_end = 6711; % Index value of the end of the transect leg at
 trans3_d_start = 6733; % Index value of the start of the transect leg at
 trans3_d_end = 6877; % Index value of the end of the transect leg at
 
+% Leg 5 of the third transect
+trans3_e_start = 6903; % Index value of the start of the transect leg at
+trans3_e_end = 7047; % Index value of the end of the transect leg at
+
+% Leg 6 of the third transect
+trans3_f_start = 7068; % Index value of the start of the transect leg at
+trans3_f_end = 7230; % Index value of the end of the transect leg at
+
+%------------------------------------------------------------------------
+% Leg 1 of the fourth transect
+trans4_a_start = 7344; % Index value of the start of the transect leg at
+trans4_a_end = 7488; % Index value of the end of the transect leg at
+
+% Leg 2 of the fourth transect
+trans4_b_start = 7500; % Index value of the start of the transect leg at
+trans4_b_end = 7635; % Index value of the end of the transect leg at
+
+% Leg 3 of the fourth transect
+trans4_c_start = 7668; % Index value of the start of the transect leg at
+trans4_c_end = 7806; % Index value of the end of the transect leg at
+
+% Leg 4 of the fourth transect
+trans4_d_start = 8151; % Index value of the start of the transect leg at
+trans4_d_end = 8455; % Index value of the end of the transect leg at
+
+% Leg 5 of the fourth transect
+trans4_e_start = 8477; % Index value of the start of the transect leg at
+trans4_e_end = 8592; % Index value of the end of the transect leg at
+
+% Leg 6 of the fourth transect
+trans4_f_start = 7824; % Index value of the start of the transect leg at
+trans4_f_end = 8113; % Index value of the end of the transect leg at
+
+%-----------------------------------------------------------------------
+% Leg 1 of the fifth transect
+trans5_a_start = 8710; % Index value of the start of the transect leg at
+trans5_a_end = 8830; % Index value of the end of the transect leg at
+
+% Leg 2 of the fifth transect
+trans5_b_start = 8887; % Index value of the start of the transect leg at
+trans5_b_end = 9011; % Index value of the end of the transect leg at
+
+% Leg 3 of the fifth transect
+trans5_c_start = 9048; % Index value of the start of the transect leg at
+trans5_c_end = 9225; % Index value of the end of the transect leg at
+
+% Leg 4 of the fifth transect
+trans5_d_start = 9248; % Index value of the start of the transect leg at
+trans5_d_end = 9435; % Index value of the end of the transect leg at
+
+% Leg 5 of the fifth transect
+trans5_e_start = 9470; % Index value of the start of the transect leg at
+trans5_e_end = 9672; % Index value of the end of the transect leg at
+
+% Leg 6 of the fifth transect
+trans5_f_start = 9697; % Index value of the start of the transect leg at
+trans5_f_end = 9868; % Index value of the end of the transect leg at
+
 %% Figure 2
     % Flight path colored by methane concentration with transects
 
@@ -153,11 +222,32 @@ scatter(av_long(trans2_g_start:trans2_g_end), av_lat(trans2_g_start:trans2_g_end
 scatter(av_long(trans2_h_start:trans2_h_end), av_lat(trans2_h_start:trans2_h_end), 10, 'MarkerEdgeColor', [0.4940 0.1840 0.5560], 'MarkerFaceColor', [0.4940 0.1840 0.5560]); % Purple
 scatter(av_long(trans2_i_start:trans2_i_end), av_lat(trans2_i_start:trans2_i_end), 10, 'MarkerEdgeColor', [0.4660 0.6740 0.1880], 'MarkerFaceColor', [0.4660 0.6740 0.1880]); % Green
 % Transect 3
-%scatter(av_long(trans3_a_start:trans3_a_end), av_lat(trans3_a_start:trans3_a_end), 10, 'r', 'filled');
-%scatter(av_long(trans3_b_start:trans3_b_end), av_lat(trans3_b_start:trans3_b_end), 10, 'g', 'filled');
-%scatter(av_long(trans3_c_start:trans3_c_end), av_lat(trans3_c_start:trans3_c_end), 10, 'k', 'filled');
+scatter(av_long(trans3_a_start:trans3_a_end), av_lat(trans3_a_start:trans3_a_end), 10, 'r', 'filled');
+scatter(av_long(trans3_b_start:trans3_b_end), av_lat(trans3_b_start:trans3_b_end), 10, 'g', 'filled');
+scatter(av_long(trans3_c_start:trans3_c_end), av_lat(trans3_c_start:trans3_c_end), 10, 'k', 'filled');
 scatter(av_long(trans3_d_start:trans3_d_end), av_lat(trans3_d_start:trans3_d_end), 10, 'm', 'filled');
+scatter(av_long(trans3_e_start:trans3_e_end), av_lat(trans3_e_start:trans3_e_end), 10, 'c', 'filled');
+scatter(av_long(trans3_f_start:trans3_f_end), av_lat(trans3_f_start:trans3_f_end), 10, 'MarkerEdgeColor', [0.6350 0.0780 0.1840], 'MarkerFaceColor', [0.6350 0.0780 0.1840]); % Maroon
+% Transect 4 
+scatter(av_long(trans4_a_start:trans4_a_end), av_lat(trans4_a_start:trans4_a_end), 10, 'r', 'filled');
+scatter(av_long(trans4_b_start:trans4_b_end), av_lat(trans4_b_start:trans4_b_end), 10, 'g', 'filled');
+scatter(av_long(trans4_c_start:trans4_c_end), av_lat(trans4_c_start:trans4_c_end), 10, 'k', 'filled');
+scatter(av_long(trans4_d_start:trans4_d_end), av_lat(trans4_d_start:trans4_d_end), 10, 'm', 'filled');
+scatter(av_long(trans4_e_start:trans4_e_end), av_lat(trans4_e_start:trans4_e_end), 10, 'c', 'filled');
+scatter(av_long(trans4_f_start:trans4_f_end), av_lat(trans4_f_start:trans4_f_end), 10, 'MarkerEdgeColor', [0.6350 0.0780 0.1840], 'MarkerFaceColor', [0.6350 0.0780 0.1840]); % Maroon
+% Transect 5
+scatter(av_long(trans5_a_start:trans5_a_end), av_lat(trans5_a_start:trans5_a_end), 10, 'r', 'filled');
+scatter(av_long(trans5_b_start:trans5_b_end), av_lat(trans5_b_start:trans5_b_end), 10, 'g', 'filled');
+scatter(av_long(trans5_c_start:trans5_c_end), av_lat(trans5_c_start:trans5_c_end), 10, 'k', 'filled');
+scatter(av_long(trans5_d_start:trans5_d_end), av_lat(trans5_d_start:trans5_d_end), 10, 'm', 'filled');
+scatter(av_long(trans5_e_start:trans5_e_end), av_lat(trans5_e_start:trans5_e_end), 10, 'c', 'filled');
+scatter(av_long(trans5_f_start:trans5_f_end), av_lat(trans5_f_start:trans5_f_end), 10, 'MarkerEdgeColor', [0.6350 0.0780 0.1840], 'MarkerFaceColor', [0.6350 0.0780 0.1840]); % Maroon
+% Feedlot locations
+p1 = scatter(-104.5881,40.43502,100,'k','filled'); % Producers
+p2 = scatter(-104.50219,40.37626,100,'r','filled'); % JBS Five Rivers -Keresy 
+p3 = scatter(-104.48439,40.44753,100,'b','filled'); % Monte Vista
 hold off
+legend({'CH_4', 'Producers', 'JBS Five Rivers - Keresy', 'Monte Vista'}, 'NumColumns', 2, 'FontSize', 20)
 xlabel('Longitude (^oE)', 'FontSize', 20) % Naming the x-axis
 ylabel('Latitude (^oN)', 'FontSize', 20) % Naming the y-axis
 title('RF13 Methane Concentrations', 'FontSize', 30); % Providing a title
