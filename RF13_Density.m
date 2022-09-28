@@ -8,6 +8,7 @@
 % September 21, 2022 - Calculated the average height of each leg;
 % Calculated the distance from the ground for each leg;  Calculated the
 % distance between each leg.
+% September 26, 2022 - Calculated air density
 
 %% Reading in the necessary files
 
@@ -246,3 +247,14 @@ scatter3(av_long(trans5_c_start:trans5_c_end), av_lat(trans5_c_start:trans5_c_en
 scatter3(av_long(trans5_d_start:trans5_d_end), av_lat(trans5_d_start:trans5_d_end), avzmsl(trans5_d_start:trans5_d_end), 10, 'm', 'filled');
 scatter3(av_long(trans5_e_start:trans5_e_end), av_lat(trans5_e_start:trans5_e_end), avzmsl(trans5_e_start:trans5_e_end), 10, 'c', 'filled');
 scatter3(av_long(trans5_f_start:trans5_f_end), av_lat(trans5_f_start:trans5_f_end), avzmsl(trans5_f_start:trans5_f_end), 10, 'MarkerEdgeColor', [0.6350 0.0780 0.1840], 'MarkerFaceColor', [0.6350 0.0780 0.1840]); % Maroon
+hold off
+xlabel('Longitude (^oE)', 'FontSize', 20) % Naming the x-axis
+ylabel('Latitude (^oN)', 'FontSize', 20) % Naming the y-axis
+zlabel('Altitude (msl)', 'FontSize', 20) % Naming the z-axis
+title('RF13 Flight Path', 'FontSize', 30); % Providing a title
+
+%% Calculating Denisty
+R = 8.314; % Universal gas constant [J/(mol*K)]
+Temp_K = trf + 273.15; % Converts temperature from Celsius to Kelvin [K]
+Press_Pa = ps_hads_a .* 100; % Converts pressure from hPa to Pa [Pa]
+Density = Press_Pa ./ (R .* Temp_K); % Calculating density [g/m^3]
