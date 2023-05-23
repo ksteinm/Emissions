@@ -233,18 +233,17 @@ usgsURL = baseURL + "/BASEMAP/MapServer/tile/${z}/${y}/${x}";
 
 % Retrieving the basemap
 basemaps = ["USGSImageryTopo"];
-color = [0.75, 0.75, .2]; % Assigns RBG color for transect numbers
 
 figure
-geoscatter(ONG_lat,ONG_lon,30,color,'filled'); % Plotting oil and gas locations
+geoscatter(ONG_lat,ONG_lon,30,'k','filled'); % Plotting oil and gas locations
 hold on
 geoscatter(AVlat(s_fiverivers:e_fiverivers),AVlon(s_fiverivers:e_fiverivers),60,CH4_ppb(s_fiverivers:e_fiverivers),'filled'); % Plots flight path colored by methane concentration
-geoscatter(40.3769,-104.511,1000,'p','y','filled'); % Plots the location of the target feedlot
-geoscatter(40.44983, -104.48439, 200, 'MarkerEdgeColor', [0.4940 0.1840 0.5560], 'MarkerFaceColor', [0.4940 0.1840 0.5560]); % Location of Monte Vista Dairy; Purple color
-geoscatter(40.428269, -104.51102, 200, 'k', 'filled'); % Location of Larson's Farms and Feeding CAFO
-geoscatter(40.369655, -104.545259, 200, 'k', 'filled'); % Location of Platte Valley Cattle Company CAFO
-geoscatter(40.362904, -104.526171, 200, 'k', 'filled'); % Location of V&T Cattle (Mendes Ranch) CAFO
-geoscatter(40.45024, -104.47313, 200, 'k', 'filled'); % Location of Wells Ranch CAFO
+geoscatter(40.3769,-104.511,2000,'p','y','filled'); % Plots the location of the target feedlot
+geoscatter(40.44983, -104.48439, 300, 'g', 'filled'); % Location of Monte Vista Dairy; Purple color
+geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Location of Larson's Farms and Feeding CAFO
+geoscatter(40.369655, -104.545259, 300, 'y', 'filled'); % Location of Platte Valley Cattle Company CAFO
+geoscatter(40.362904, -104.526171, 300, 'y', 'filled'); % Location of V&T Cattle (Mendes Ranch) CAFO
+geoscatter(40.45024, -104.47313, 300, 'y', 'filled'); % Location of Wells Ranch CAFO
 geolimits([40.32 40.6],[-104.6 -104.2]) % Sets the longitude and latitude limits of the map
 set(gca, 'FontSize', 20) % Setting the font size of the numbers
 geobasemap(basemaps) % Plots the basemap background
@@ -263,15 +262,15 @@ c.Label.String = 'CH_4 (ppbv)'; % Creates the colorbar label
 % Flight Paths with Map Background
 
 figure
-geoscatter(ONG_lat,ONG_lon,30,color,'filled'); % Plotting oil and gas locations
+geoscatter(ONG_lat,ONG_lon,30,'k','filled'); % Plotting oil and gas locations
 hold on
 geoscatter(AVlat(s_fiverivers:e_fiverivers),AVlon(s_fiverivers:e_fiverivers),60,NH3(s_fiverivers:e_fiverivers),'filled'); % Plots flight path colored by methane concentration
-geoscatter(40.3769,-104.511,1000,'p','y','filled'); % Plots the location of the target feedlot
-geoscatter(40.44983, -104.48439, 200, 'MarkerEdgeColor', [0.4940 0.1840 0.5560], 'MarkerFaceColor', [0.4940 0.1840 0.5560]); % Location of Monte Vista Dairy; Purple color
-geoscatter(40.428269, -104.51102, 200, 'k', 'filled'); % Location of Larson's Farms and Feeding CAFO
-geoscatter(40.369655, -104.545259, 200, 'k', 'filled'); % Location of Platte Valley Cattle Company CAFO
-geoscatter(40.362904, -104.526171, 200, 'k', 'filled'); % Location of V&T Cattle (Mendes Ranch) CAFO
-geoscatter(40.45024, -104.47313, 200, 'k', 'filled'); % Location of Wells Ranch CAFO
+geoscatter(40.3769,-104.511,2000,'p','y','filled'); % Plots the location of the target feedlot
+geoscatter(40.44983, -104.48439, 300, 'g', 'filled'); % Location of Monte Vista Dairy; Purple color
+geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Location of Larson's Farms and Feeding CAFO
+geoscatter(40.369655, -104.545259, 300, 'y', 'filled'); % Location of Platte Valley Cattle Company CAFO
+geoscatter(40.362904, -104.526171, 300, 'y', 'filled'); % Location of V&T Cattle (Mendes Ranch) CAFO
+geoscatter(40.45024, -104.47313, 300, 'y', 'filled'); % Location of Wells Ranch CAFO
 geolimits([40.32 40.6],[-104.6 -104.2]) % Sets the longitude and latitude limits of the map
 set(gca, 'FontSize', 20) % Setting the font size of the numbers
 geobasemap(basemaps) % Plots the basemap background
