@@ -6,6 +6,8 @@
     % CAFOS
 % Figures 7 and 8 show the flight track associated with the JBS Five Rivers
     % facility and CAFOs and dairies in the region
+% Figures 9 and 10 show the flight track associated with the Producers
+    % facility and CAFOs and dairies in the region
 % Code modified from Megan McCabe
 
 %% Reading in data
@@ -33,6 +35,10 @@ done = 10700; % End of feelot sampling
 % Found by looking at flight path
 s_fiverivers = 5730; % Start of five rivers observations
 e_fiverivers = 10500; % End of five rivers observations
+
+% Found by looking at flight path
+s_Producers = 1700; % Beginning of feedlot sampling
+e_Producers = 5750; % End of feelot sampling
 
 % Reading in VAFO location information
 CAFO_file = readtable('CAFO_cattle.xlsx');
@@ -284,7 +290,49 @@ text(40.528,-104.44083, '5', 'Color','w','FontSize',30) % Transect 5 label
 c = colorbar; % Shows the colorbar to the right of the plot
 c.Label.String = 'NH_3 (ppbv)';  % Creates the colorbar label
 
+%% Figure 9 
+% Flight Paths of Producers with Map Background
 
+figure
+geoscatter(ONG_lat,ONG_lon,70,'k','filled'); % Plotting oil and gas locations
+hold on
+geoscatter(AVlat(s_Producers:e_Producers),AVlon(s_Producers:e_Producers),60,CH4_ppb(s_Producers:e_Producers),'filled'); % Plots flight path colored by methane concentration
+geoscatter(40.435182, -104.601597, 2000, 'p', 'y', 'filled')
+geoscatter(40.492649, -104.522827, 300, 'g', 'filled'); % Location of Aurora Dairy Crop
+geoscatter(40.42848, -104.59066, 300, 'y', 'filled'); % Location of Diamond Feeders
+geoscatter(40.4849, -104.5431667, 300, 'g', 'filled'); % Location of Kerbs Dairy
+geoscatter(40.49397, -104.65371, 300, 'y', 'filled'); % Location of E Bar M Feedyard
+geoscatter(40.4951, -104.5834, 300, 'y', 'filled'); % Location of Unknown Cattle Feedlot
+geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Location of Larson's Farm and Feed
+geolimits([40.35 40.55],[-104.7 -104.4]) % Sets the longitude and latitude limits of the map
+set(gca, 'FontSize', 20) % Setting the font size of the numbers
+geobasemap(basemaps) % Plots the basemap background
+colormap(flipud(mycolormap)) % Flips the colorbar
+caxis([1920 2400]) % Sets the minimum and maximum methane concentration for the colorbar
+c = colorbar; % Shows the colorbar to the right of the plot
+c.Label.String = 'CH_4 (ppbv)'; % Creates the colorbar label
+
+%% Figure 10
+% Flight Paths of Producers with Map Background
+
+figure
+geoscatter(ONG_lat,ONG_lon,70,'k','filled'); % Plotting oil and gas locations
+hold on
+geoscatter(AVlat(s_Producers:e_Producers),AVlon(s_Producers:e_Producers),60,NH3(s_Producers:e_Producers),'filled'); % Plots flight path colored by methane concentration
+geoscatter(40.435182, -104.601597, 2000, 'p', 'y', 'filled')
+geoscatter(40.492649, -104.522827, 300, 'g', 'filled'); % Location of Aurora Dairy Crop
+geoscatter(40.42848, -104.59066, 300, 'y', 'filled'); % Location of Diamond Feeders
+geoscatter(40.4849, -104.5431667, 300, 'g', 'filled'); % Location of Kerbs Dairy
+geoscatter(40.49397, -104.65371, 300, 'y', 'filled'); % Location of E Bar M Feedyard
+geoscatter(40.4951, -104.5834, 300, 'y', 'filled'); % Location of Unknown Cattle Feedlot
+geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Location of Larson's Farm and Feed
+geolimits([40.35 40.55],[-104.7 -104.4]) % Sets the longitude and latitude limits of the map
+set(gca, 'FontSize', 20) % Setting the font size of the numbers
+geobasemap(basemaps) % Plots the basemap background
+colormap(flipud(mycolormap)) % Flips the colorbar
+caxis([0 200]) % Sets the minimum and maximum ammonia concentration for the colorbar
+c = colorbar; % Shows the colorbar to the right of the plot
+c.Label.String = 'NH_3 (ppbv)';  % Creates the colorbar label
 
 
 
