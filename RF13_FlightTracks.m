@@ -12,7 +12,7 @@
 
 %% Reading in data
 
-M = importdata('RF13_merge_1Hz.csv',',',1); % 1 header lines and commana for deliminator, 
+M = importdata('RF13_merge_1Hz.csv',',',1); % 1 header lines and comma for deliminator, 
 v = genvarname(M.colheaders); %get variable names from headers
 for i=1:length(M.colheaders)
     eval([v{i} ' =M.data(:,i)']);
@@ -52,9 +52,6 @@ ONG_file = readtable('oil_and_gas.xlsx');
 
 ONG_lat = ONG_file{:, 1}; % Latitudes of oil and gas sites [degrees north]
 ONG_lon = ONG_file{:, 2}; % Longitudes of oila and gas sites [degrees east]
-
-% Methane conversion
-CH4_ppb = CH4 .* 1000; % Making methane the same units as ammonia [ppbv]
 
 % Creating colormap for plot taken from Megan McCabe
 mycolormap =[
@@ -109,127 +106,136 @@ mycolormap =[
     0 0 .65
     0 0 .5];
 
+%% Conversion
+
+% Methane conversion
+CH4_ppb = CH4 .* 1000; % [ppbv]
+
 %% Figure 1
 % Flight path colored by methane concentration
+
 figure
-scatter(AVlon, AVlat, 5, CH4, 'filled') % Plots the flight path colored by methane concentration
-set(gca, 'FontSize', 20) % Setting the font size of the numbers
-c1=colorbar; % Showing colorbar
-c1.Label.String = 'Methane Concentration (ppmv)'; % Labeling the colorbar
-set(c1, 'FontSize', 20) % Setting the font size of the colorbar
-caxis([1.8 2]) % Sets the minimum and maximum methane concentration for the colorbar
-xlabel('Longitude (^oE)', 'FontSize', 20) % X-axis label
-ylabel('Latitude (^oN)', 'FontSize', 20) % Y-axis label
-title('RF13 Methane Concentrations', 'FontSize', 30) % Plot title
-grid on % Turning on the major grid
-grid minor % Turning on the minor grid
+scatter(AVlon, AVlat, 5, CH4, 'filled')
+set(gca, 'FontSize', 20)
+c1=colorbar;
+c1.Label.String = 'Methane Concentration (ppmv)';
+set(c1, 'FontSize', 20)
+clim([1.8 2])
+xlabel('Longitude (^oE)', 'FontSize', 20)
+ylabel('Latitude (^oN)', 'FontSize', 20)
+title('RF13 Methane Concentrations', 'FontSize', 30)
+grid on
+grid minor
 
 %% Figure 2
 % Flight path colored by ammonia concentration
+
 figure
-scatter(AVlon, AVlat, 5, NH3, 'filled') % Plots the flight path colored by ammonia concentration
-set(gca, 'FontSize', 20) % Setting the font size of the numbers
-c2=colorbar; % Showing colorbar
-c2.Label.String = 'Ammonia Concentration [ppbv]'; % Labeling the colorbar
-set(c2, 'FontSize', 20) % Setting the fontsize of the colorbar
-caxis([0 100]) % Sets the minimum and maximum ammonia concentration for the colorbar
-xlabel('Longitude (^oE)', 'FontSize', 20) % X-axis label
-ylabel('Latitude (^oN)', 'FontSize', 20) % Y-axis label
-title('RF13 Ammonia Concentrations', 'FontSize', 30') % Plot title
-grid on % Turning on the major grid
-grid minor % Turning on the minor grid
+scatter(AVlon, AVlat, 5, NH3, 'filled')
+set(gca, 'FontSize', 20)
+c2=colorbar;
+c2.Label.String = 'Ammonia Concentration [ppbv]';
+set(c2, 'FontSize', 20)
+clim([0 100])
+xlabel('Longitude (^oE)', 'FontSize', 20)
+ylabel('Latitude (^oN)', 'FontSize', 20)
+title('RF13 Ammonia Concentrations', 'FontSize', 30')
+grid on
+grid minor
 
 %% Figure 3
 % Flight path colored by ethane concentration
+
 figure
-scatter(AVlon, AVlat, 5, C2H6, 'filled') % Plots the flight path colored by ethane concentration
-set(gca, 'FontSize', 20) % Setting the font size of the number
-c3=colorbar; % Showing colorbar
-c3.Label.String = 'Ethane Concentration (ppbv)'; % Labeling the colorbar
-set(c3, 'FontSize', 20) % Setting the fontsize of the colorbar
-caxis([0 18]) % Sets the minimum and maximum methane concentration for the colorbar
-xlabel('Longitude (^oE)', 'FontSize', 20) % X-axis label
-ylabel('Latitude (^oN)', 'FontSize', 20) % Y-axis label
-title('RF13 Ethane Concentrations', 'FontSize', 30) % Plot title
-grid on % Turning on the major grid
-grid minor % Turning on the minor grid
+scatter(AVlon, AVlat, 5, C2H6, 'filled')
+set(gca, 'FontSize', 20)
+c3=colorbar;
+c3.Label.String = 'Ethane Concentration (ppbv)';
+set(c3, 'FontSize', 20)
+clim([0 18])
+xlabel('Longitude (^oE)', 'FontSize', 20)
+ylabel('Latitude (^oN)', 'FontSize', 20)
+title('RF13 Ethane Concentrations', 'FontSize', 30)
+grid on
+grid minor
 
 %% Figure 4
 % Flight path colored by methane including feedlot location
 
 figure
-p1 = scatter(-104.601597,40.435182, 100, 'k','filled'); % Location of Producers CAFO
-set(gca, 'FontSize', 20) % Setting the font size of the numbers
-c4=colorbar; % Showing colorbar
-c4.Label.String = 'Methane Concentration (ppb)'; % Labeling colorbar
-set(c4, 'FontSize', 40) % Setting the font size of the colorbar
-caxis([1.85 2.2]) % Sets the minimum and maximum methane concentration for the colorbar
+p4a = scatter(-104.601597,40.435182, 100, 'k','filled'); % Producers
+set(gca, 'FontSize', 20)
+c4=colorbar;
+c4.Label.String = 'Methane Concentration (ppb)';
+set(c4, 'FontSize', 40)
+clim([1.85 2.2])
 hold on
-p2 = scatter(-104.511,40.3769, 100, 'r','filled'); % Location of JBS Five Rivers Kersey CAFO
-p3 = scatter(-104.48439,40.44983, 100, 'MarkerEdgeColor', [0.4940 0.1840 0.5560], 'MarkerFaceColor', [0.4940 0.1840 0.5560]); % Location of Monte Vista Dairy; Purple color
-p4 = scatter(-104.51102, 40.428269, 100, 'm', 'filled'); % Location of Larson's Farms and Feeding CAFO
-p5 = scatter(-104.545259, 40.369655, 100, 'MarkerEdgeColor', [0.8500 0.3250 0.1250], 'MarkerFaceColor', [0.8500 0.3250 0.1250]); % Location of Platte Valley Cattle Company CAFO; Orange color
-p6 = scatter(-104.526171, 40.362904, 100, 'MarkerEdgeColor', [0.4660 0.6740 0.1880], 'MarkerFaceColor', [0.4660 0.6740 0.1880]); % Location of V&T Cattle (Mendes Ranch) CAFO; Green color
-p7 = scatter(-104.47313, 40.45024, 100, 'MarkerEdgeColor', [0.6350 0.0780 0.1840], 'MarkerFaceColor', [0.6350 0.0780 0.1840]); % Location of Wells Ranch CAFO; Maroon color
-scatter(AVlon(start:done), AVlat(start:done), 7, CH4(start:done), 'filled') % Plots the flight path colored by methane concentration
-legend({'Producers', 'JBS Five Rivers Keresy', 'Monte Vista', 'Larsons Farm and Feeding', 'Platte Valley Cattle Company', 'V&T Cattle', 'Wells Ranch'}, 'NumColumns', 2, 'FontSize', 20) % Legend information
-xlabel('Longitude (^oE)', 'FontSize', 30) % X-axis label
-ylabel('Latitude (^oN)', 'FontSize', 30) % Y-axis label
-title('RF13 Methane Concentrations with Feedlot Locations', 'FontSize', 40); % Plot title
-grid on % Turning on major grid
-grid minor  % Turning on minor grid
+p4b = scatter(-104.511,40.3769, 100, 'r','filled'); % JBS Five Rivers Kersey
+p4c = scatter(-104.48439,40.44983, 100, 'MarkerEdgeColor', [0.4940 0.1840 0.5560], 'MarkerFaceColor', [0.4940 0.1840 0.5560]); % Monte Vista Dairy; Purple color
+p4d = scatter(-104.51102, 40.428269, 100, 'm', 'filled'); % Larson's Farms and Feeding
+p4e = scatter(-104.545259, 40.369655, 100, 'MarkerEdgeColor', [0.8500 0.3250 0.1250], 'MarkerFaceColor', [0.8500 0.3250 0.1250]); % Platte Valley Cattle Company; Orange color
+p4f = scatter(-104.526171, 40.362904, 100, 'MarkerEdgeColor', [0.4660 0.6740 0.1880], 'MarkerFaceColor', [0.4660 0.6740 0.1880]); % V&T Cattle (Mendes Ranch); Green color
+p4g = scatter(-104.47313, 40.45024, 100, 'MarkerEdgeColor', [0.6350 0.0780 0.1840], 'MarkerFaceColor', [0.6350 0.0780 0.1840]); % Wells Ranch; Maroon color
+scatter(AVlon(start:done), AVlat(start:done), 7, CH4(start:done), 'filled')
+legend({'Producers', 'JBS Five Rivers Keresy', 'Monte Vista', 'Larsons Farm and Feeding', 'Platte Valley Cattle Company', 'V&T Cattle', 'Wells Ranch'}, 'NumColumns', 2, 'FontSize', 20)
+xlabel('Longitude (^oE)', 'FontSize', 30)
+ylabel('Latitude (^oN)', 'FontSize', 30)
+title('RF13 Methane Concentrations with Feedlot Locations', 'FontSize', 40);
+grid on
+grid minor 
 
 %% Figure 5
 % Flight path colored by ammonia including feedlot locations
+
 figure
-p1 = scatter(-104.601597,40.435182, 100, 'k','filled'); % Location of Producers CAFO
-set(gca, 'FontSize', 20) % Setting the font size of the numbers
-c5=colorbar; % Showing colorbar
-c5.Label.String = 'Ammonia Concentration [ppbv]'; % Naming the colorbar
-set(c5, 'FontSize', 20) % Setting the fontsize of the colorbar
-caxis([0 100]) % Sets the minimum and maximum ammonia concentration for the colorbar
+p5a = scatter(-104.601597,40.435182, 100, 'k','filled'); % Producers
+set(gca, 'FontSize', 20)
+c5=colorbar;
+c5.Label.String = 'Ammonia Concentration [ppbv]';
+set(c5, 'FontSize', 20)
+clim([0 100])
 hold on
-p2 = scatter(-104.511,40.3769, 100, 'r','filled'); % Location of JBS Five Rivers Kersey CAFO
-p3 = scatter(-104.48439,40.44983, 100, 'MarkerEdgeColor', [0.4940 0.1840 0.5560], 'MarkerFaceColor', [0.4940 0.1840 0.5560]); % Location of Monte Vista Dairy; Purple color
-p4 = scatter(-104.51102, 40.428269, 100, 'm', 'filled'); % Location of Larson's Farms and Feeding CAFO
-p5 = scatter(-104.545259, 40.369655, 100, 'MarkerEdgeColor', [0.8500 0.3250 0.1250], 'MarkerFaceColor', [0.8500 0.3250 0.1250]); % Location of Platte Valley Cattle Company CAFO; Orange color
-p6 = scatter(-104.526171, 40.362904, 100, 'MarkerEdgeColor', [0.4660 0.6740 0.1880], 'MarkerFaceColor', [0.4660 0.6740 0.1880]); % Location of V&T Cattle (Mendes Ranch) CAFO; Green color
-p7 = scatter(-104.47313, 40.45024, 100, 'MarkerEdgeColor', [0.6350 0.0780 0.1840], 'MarkerFaceColor', [0.6350 0.0780 0.1840]); % Location of Wells Ranch CAFO; Maroon color
-scatter(AVlon(start:done), AVlat(start:done), 5, NH3(start:done), 'filled') % Plots the flight path colored by ammonia concentration
-legend({'Producers', 'JBS Five Rivers Keresy', 'Monte Vista', 'Larsons Farm and Feeding', 'Platte Valley Cattle Company', 'V&T Cattle', 'Wells Ranch'}, 'NumColumns', 2, 'FontSize', 20) % Legend information
-xlabel('Longitude (^oE)', 'FontSize', 20) % X-axis label
-ylabel('Latitude (^oN)', 'FontSize', 20) % Y-axis label
-title('RF13 Ammonia Concentrations with Feedlot Locations', 'FontSize', 30); % Plot title
-grid on % Turning on major grid
-grid minor  % Turning on minor grid
+p5b = scatter(-104.511,40.3769, 100, 'r','filled'); % JBS Five Rivers Kersey
+p5c = scatter(-104.48439,40.44983, 100, 'MarkerEdgeColor', [0.4940 0.1840 0.5560], 'MarkerFaceColor', [0.4940 0.1840 0.5560]); % Monte Vista Dairy; Purple color
+p5d = scatter(-104.51102, 40.428269, 100, 'm', 'filled'); % Larson's Farms and Feeding
+p5e = scatter(-104.545259, 40.369655, 100, 'MarkerEdgeColor', [0.8500 0.3250 0.1250], 'MarkerFaceColor', [0.8500 0.3250 0.1250]); % Platte Valley Cattle Company; Orange color
+p5f = scatter(-104.526171, 40.362904, 100, 'MarkerEdgeColor', [0.4660 0.6740 0.1880], 'MarkerFaceColor', [0.4660 0.6740 0.1880]); % V&T Cattle (Mendes Ranch); Green color
+p5g = scatter(-104.47313, 40.45024, 100, 'MarkerEdgeColor', [0.6350 0.0780 0.1840], 'MarkerFaceColor', [0.6350 0.0780 0.1840]); % Wells Ranch; Maroon color
+scatter(AVlon(start:done), AVlat(start:done), 5, NH3(start:done), 'filled')
+legend({'Producers', 'JBS Five Rivers Keresy', 'Monte Vista', 'Larsons Farm and Feeding', 'Platte Valley Cattle Company', 'V&T Cattle', 'Wells Ranch'}, 'NumColumns', 2, 'FontSize', 20)
+xlabel('Longitude (^oE)', 'FontSize', 20)
+ylabel('Latitude (^oN)', 'FontSize', 20)
+title('RF13 Ammonia Concentrations with Feedlot Locations', 'FontSize', 30);
+grid on
+grid minor
 
 %% Figure 6
 % Flight path colored by ethane including feedlot location
+
 figure
-p1 = scatter(-104.601597,40.435182, 100, 'k','filled'); % Location of Producers CAFO
-set(gca, 'FontSize', 20) % Setting the font size of the number
-c3=colorbar; % Showing colorbar
-c3.Label.String = 'Ethane Concentration (ppbv)'; % Naming the colorbar
-set(c3, 'FontSize', 20) % Setting the fontsize of the colorbar
-caxis([0 18]) % Sets the minimum and maximum methane concentration for the colorbar
+p6a = scatter(-104.601597,40.435182, 100, 'k','filled'); % Producers CAFO
+set(gca, 'FontSize', 20)
+c6=colorbar;
+c6.Label.String = 'Ethane Concentration (ppbv)';
+set(c6, 'FontSize', 20)
+clim([0 18])
 hold on
-%Greeley feedlot locations
-p2 = scatter(-104.511,40.3769, 100, 'r','filled'); % Location of JBS Five Rivers Kersey CAFO
-p3 = scatter(-104.48439,40.44983, 100, 'MarkerEdgeColor', [0.4940 0.1840 0.5560], 'MarkerFaceColor', [0.4940 0.1840 0.5560]); % Location of Monte Vista Dairy; Purple color
-p4 = scatter(-104.51102, 40.428269, 100, 'm', 'filled'); % Location of Larson's Farms and Feeding CAFO
-p5 = scatter(-104.545259, 40.369655, 100, 'MarkerEdgeColor', [0.8500 0.3250 0.1250], 'MarkerFaceColor', [0.8500 0.3250 0.1250]); % Location of Platte Valley Cattle Company CAFO; Orange color
-p6 = scatter(-104.526171, 40.362904, 100, 'MarkerEdgeColor', [0.4660 0.6740 0.1880], 'MarkerFaceColor', [0.4660 0.6740 0.1880]); % Location of V&T Cattle (Mendes Ranch) CAFO; Green color
-p7 = scatter(-104.47313, 40.45024, 100, 'MarkerEdgeColor', [0.6350 0.0780 0.1840], 'MarkerFaceColor', [0.6350 0.0780 0.1840]); % Location of Wells Ranch CAFO; Maroon color
-scatter(AVlon(start:done), AVlat(start:done), 5, C2H6(start:done), 'filled') % Plots the flight path colored by ethane concentration
-legend({'Producers', 'JBS Five Rivers Keresy', 'Monte Vista', 'Larsons Farm and Feeding', 'Platte Valley Cattle Company', 'V&T Cattle', 'Wells Ranch'}, 'NumColumns', 2, 'FontSize', 20) % Legend information
-xlabel('Longitude (^oE)', 'FontSize', 20) % X-axis label
-ylabel('Latitude (^oN)', 'FontSize', 20) % Y-axis label
-title('RF13 Ethane Concentrations with Feedlot Locations', 'FontSize', 30); % Plot title
-grid on % Turning on major grid
-grid minor  % Turning on minor grid
+p6b = scatter(-104.511,40.3769, 100, 'r','filled'); % JBS Five Rivers Kersey
+p6c = scatter(-104.48439,40.44983, 100, 'MarkerEdgeColor', [0.4940 0.1840 0.5560], 'MarkerFaceColor', [0.4940 0.1840 0.5560]); % Monte Vista Dairy; Purple color
+p6d = scatter(-104.51102, 40.428269, 100, 'm', 'filled'); % Larson's Farms and Feeding
+p6e = scatter(-104.545259, 40.369655, 100, 'MarkerEdgeColor', [0.8500 0.3250 0.1250], 'MarkerFaceColor', [0.8500 0.3250 0.1250]); % Platte Valley Cattle Company; Orange color
+p6f = scatter(-104.526171, 40.362904, 100, 'MarkerEdgeColor', [0.4660 0.6740 0.1880], 'MarkerFaceColor', [0.4660 0.6740 0.1880]); % V&T Cattle (Mendes Ranch); Green color
+p6g = scatter(-104.47313, 40.45024, 100, 'MarkerEdgeColor', [0.6350 0.0780 0.1840], 'MarkerFaceColor', [0.6350 0.0780 0.1840]); % Wells Ranch; Maroon color
+scatter(AVlon(start:done), AVlat(start:done), 5, C2H6(start:done), 'filled')
+legend({'Producers', 'JBS Five Rivers Keresy', 'Monte Vista', 'Larsons Farm and Feeding', 'Platte Valley Cattle Company', 'V&T Cattle', 'Wells Ranch'}, 'NumColumns', 2, 'FontSize', 20)
+xlabel('Longitude (^oE)', 'FontSize', 20)
+ylabel('Latitude (^oN)', 'FontSize', 20)
+title('RF13 Ethane Concentrations with Feedlot Locations', 'FontSize', 30);
+grid on
+grid minor
 
 %% Figure 7 
-% Flight Paths with Map Background
+% JBS Flight Path with Map Background
 
 % Accessing map website
 baseURL = "https://basemap.nationalmap.gov/ArcGIS/rest/services";
@@ -238,101 +244,99 @@ baseURL = "https://basemap.nationalmap.gov/ArcGIS/rest/services";
 usgsURL = baseURL + "/BASEMAP/MapServer/tile/${z}/${y}/${x}";
 
 % Retrieving the basemap
-basemaps = ["USGSImageryTopo"];
+basemaps = "USGSImageryTopo";
 
 figure
-geoscatter(ONG_lat,ONG_lon,30,'k','filled'); % Plotting oil and gas locations
+% Plotting oil and gas locations
+geoscatter(ONG_lat,ONG_lon,30,'k','filled');
 hold on
-geoscatter(AVlat(s_fiverivers:e_fiverivers),AVlon(s_fiverivers:e_fiverivers),60,CH4_ppb(s_fiverivers:e_fiverivers),'filled'); % Plots flight path colored by methane concentration
-geoscatter(40.3769,-104.511,2000,'p','y','filled'); % Plots the location of the target feedlot
-geoscatter(40.44983, -104.48439, 300, 'g', 'filled'); % Location of Monte Vista Dairy; Purple color
-geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Location of Larson's Farms and Feeding CAFO
-geoscatter(40.369655, -104.545259, 300, 'y', 'filled'); % Location of Platte Valley Cattle Company CAFO
-geoscatter(40.362904, -104.526171, 300, 'y', 'filled'); % Location of V&T Cattle (Mendes Ranch) CAFO
-geoscatter(40.45024, -104.47313, 300, 'y', 'filled'); % Location of Wells Ranch CAFO
-geolimits([40.32 40.6],[-104.6 -104.2]) % Sets the longitude and latitude limits of the map
-set(gca, 'FontSize', 20) % Setting the font size of the numbers
-geobasemap(basemaps) % Plots the basemap background
-colormap(flipud(mycolormap)) % Flips the colorbar
-caxis([1920 2200]) % Sets the minimum and maximum methane concentration for the colorbar
-text(40.409,-104.530783, '1', 'Color','w','FontSize',30) % Transect 1 label
-text(40.448,-104.49983, '2', 'Color','w','FontSize',30) % Transect 2 label
-text(40.468,-104.46683, '3', 'Color','w','FontSize',30) % Transect 3 label
-text(40.504,-104.43083, '4', 'Color','w','FontSize',30) % Transect 4 label
-text(40.528,-104.44083, '5', 'Color','w','FontSize',30) % Transect 5 label
-c = colorbar; % Shows the colorbar to the right of the plot
-c.Label.String = 'CH_4 (ppbv)'; % Creates the colorbar label
+geoscatter(AVlat(s_fiverivers:e_fiverivers),AVlon(s_fiverivers:e_fiverivers),60,CH4_ppb(s_fiverivers:e_fiverivers),'filled');
+geoscatter(40.3769,-104.511,2000,'p','y','filled'); % Target feedolot
+geoscatter(40.44983, -104.48439, 300, 'g', 'filled'); % Dairy; Purple color
+geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Cattle
+geoscatter(40.369655, -104.545259, 300, 'y', 'filled'); % Cattle
+geoscatter(40.362904, -104.526171, 300, 'y', 'filled'); % Cattle
+geoscatter(40.45024, -104.47313, 300, 'y', 'filled'); % Cattle
+% Map limits
+geolimits([40.32 40.6],[-104.6 -104.2])
+set(gca, 'FontSize', 20)
+geobasemap(basemaps)
+colormap(flipud(mycolormap))
+clim([1920 2200])
+c7 = colorbar;
+c7.Label.String = 'CH_4 (ppbv)';
 
 
 %% Figure 8
-% Flight Paths with Map Background
+% JBS Flight Path with Map Background
 
 figure
-geoscatter(ONG_lat,ONG_lon,30,'k','filled'); % Plotting oil and gas locations
+% Plotting oil and gas locations
+geoscatter(ONG_lat,ONG_lon,30,'k','filled');
 hold on
-geoscatter(AVlat(s_fiverivers:e_fiverivers),AVlon(s_fiverivers:e_fiverivers),60,NH3(s_fiverivers:e_fiverivers),'filled'); % Plots flight path colored by methane concentration
-geoscatter(40.3769,-104.511,2000,'p','y','filled'); % Plots the location of the target feedlot
-geoscatter(40.44983, -104.48439, 300, 'g', 'filled'); % Location of Monte Vista Dairy; Purple color
-geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Location of Larson's Farms and Feeding CAFO
-geoscatter(40.369655, -104.545259, 300, 'y', 'filled'); % Location of Platte Valley Cattle Company CAFO
-geoscatter(40.362904, -104.526171, 300, 'y', 'filled'); % Location of V&T Cattle (Mendes Ranch) CAFO
-geoscatter(40.45024, -104.47313, 300, 'y', 'filled'); % Location of Wells Ranch CAFO
-geolimits([40.32 40.6],[-104.6 -104.2]) % Sets the longitude and latitude limits of the map
-set(gca, 'FontSize', 20) % Setting the font size of the numbers
-geobasemap(basemaps) % Plots the basemap background
-colormap(flipud(mycolormap)) % Flips the colorbar
-caxis([0 200]) % Sets the minimum and maximum ammonia concentration for the colorbar
-text(40.409,-104.530783, '1', 'Color','w','FontSize',30) % Transect 1 label
-text(40.448,-104.49983, '2', 'Color','w','FontSize',30) % Transect 2 label
-text(40.468,-104.46683, '3', 'Color','w','FontSize',30) % Transect 3 label
-text(40.504,-104.43083, '4', 'Color','w','FontSize',30) % Transect 4 label
-text(40.528,-104.44083, '5', 'Color','w','FontSize',30) % Transect 5 label
-c = colorbar; % Shows the colorbar to the right of the plot
-c.Label.String = 'NH_3 (ppbv)';  % Creates the colorbar label
+geoscatter(AVlat(s_fiverivers:e_fiverivers),AVlon(s_fiverivers:e_fiverivers),60,NH3(s_fiverivers:e_fiverivers),'filled');
+geoscatter(40.3769,-104.511,2000,'p','y','filled'); % Target feedlot
+geoscatter(40.44983, -104.48439, 300, 'g', 'filled'); % Dairy; Purple color
+geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Cattle
+geoscatter(40.369655, -104.545259, 300, 'y', 'filled'); % Cattle
+geoscatter(40.362904, -104.526171, 300, 'y', 'filled'); % Cattle
+geoscatter(40.45024, -104.47313, 300, 'y', 'filled'); % Cattle
+% Map limits
+geolimits([40.32 40.6],[-104.6 -104.2])
+set(gca, 'FontSize', 20)
+geobasemap(basemaps)
+colormap(flipud(mycolormap))
+clim([0 200])
+c8 = colorbar;
+c8.Label.String = 'NH_3 (ppbv)';
 
 %% Figure 9 
 % Flight Paths of Producers with Map Background
 
 figure
-geoscatter(ONG_lat,ONG_lon,70,'k','filled'); % Plotting oil and gas locations
+% Plotting oil and gas locations
+geoscatter(ONG_lat,ONG_lon,70,'k','filled');
 hold on
-geoscatter(AVlat(s_Producers:e_Producers),AVlon(s_Producers:e_Producers),60,CH4_ppb(s_Producers:e_Producers),'filled'); % Plots flight path colored by methane concentration
-geoscatter(40.435182, -104.601597, 2000, 'p', 'y', 'filled')
-geoscatter(40.492649, -104.522827, 300, 'g', 'filled'); % Location of Aurora Dairy Crop
-geoscatter(40.42848, -104.59066, 300, 'y', 'filled'); % Location of Diamond Feeders
-geoscatter(40.4849, -104.5431667, 300, 'g', 'filled'); % Location of Kerbs Dairy
-geoscatter(40.49397, -104.65371, 300, 'y', 'filled'); % Location of E Bar M Feedyard
-geoscatter(40.4951, -104.5834, 300, 'y', 'filled'); % Location of Unknown Cattle Feedlot
-geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Location of Larson's Farm and Feed
-geolimits([40.35 40.55],[-104.7 -104.4]) % Sets the longitude and latitude limits of the map
-set(gca, 'FontSize', 20) % Setting the font size of the numbers
-geobasemap(basemaps) % Plots the basemap background
-colormap(flipud(mycolormap)) % Flips the colorbar
-caxis([1920 2400]) % Sets the minimum and maximum methane concentration for the colorbar
-c = colorbar; % Shows the colorbar to the right of the plot
-c.Label.String = 'CH_4 (ppbv)'; % Creates the colorbar label
+geoscatter(AVlat(s_Producers:e_Producers),AVlon(s_Producers:e_Producers),60,CH4_ppb(s_Producers:e_Producers),'filled');
+geoscatter(40.435182, -104.601597, 2000, 'p', 'y', 'filled') % Target feedlot
+geoscatter(40.492649, -104.522827, 300, 'g', 'filled'); % Dairy
+geoscatter(40.42848, -104.59066, 300, 'y', 'filled'); % Cattle
+geoscatter(40.4849, -104.5431667, 300, 'g', 'filled'); % Dairy
+geoscatter(40.49397, -104.65371, 300, 'y', 'filled'); % Cattle
+geoscatter(40.4951, -104.5834, 300, 'y', 'filled'); % Cattle
+geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Cattle
+% Map limits
+geolimits([40.35 40.55],[-104.7 -104.4])
+set(gca, 'FontSize', 20)
+geobasemap(basemaps)
+colormap(flipud(mycolormap))
+clim([1920 2400])
+c9 = colorbar;
+c9.Label.String = 'CH_4 (ppbv)';
 
 %% Figure 10
 % Flight Paths of Producers with Map Background
 
 figure
-geoscatter(ONG_lat,ONG_lon,70,'k','filled'); % Plotting oil and gas locations
+% Plotting oil and gas locations
+geoscatter(ONG_lat,ONG_lon,70,'k','filled');
 hold on
-geoscatter(AVlat(s_Producers:e_Producers),AVlon(s_Producers:e_Producers),60,NH3(s_Producers:e_Producers),'filled'); % Plots flight path colored by methane concentration
-geoscatter(40.435182, -104.601597, 2000, 'p', 'y', 'filled')
-geoscatter(40.492649, -104.522827, 300, 'g', 'filled'); % Location of Aurora Dairy Crop
-geoscatter(40.42848, -104.59066, 300, 'y', 'filled'); % Location of Diamond Feeders
-geoscatter(40.4849, -104.5431667, 300, 'g', 'filled'); % Location of Kerbs Dairy
-geoscatter(40.49397, -104.65371, 300, 'y', 'filled'); % Location of E Bar M Feedyard
-geoscatter(40.4951, -104.5834, 300, 'y', 'filled'); % Location of Unknown Cattle Feedlot
-geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Location of Larson's Farm and Feed
-geolimits([40.35 40.55],[-104.7 -104.4]) % Sets the longitude and latitude limits of the map
-set(gca, 'FontSize', 20) % Setting the font size of the numbers
-geobasemap(basemaps) % Plots the basemap background
-colormap(flipud(mycolormap)) % Flips the colorbar
-caxis([0 200]) % Sets the minimum and maximum ammonia concentration for the colorbar
-c = colorbar; % Shows the colorbar to the right of the plot
-c.Label.String = 'NH_3 (ppbv)';  % Creates the colorbar label
+geoscatter(AVlat(s_Producers:e_Producers),AVlon(s_Producers:e_Producers),60,NH3(s_Producers:e_Producers),'filled');
+geoscatter(40.435182, -104.601597, 2000, 'p', 'y', 'filled') % Target feedlot
+geoscatter(40.492649, -104.522827, 300, 'g', 'filled'); % Dairy
+geoscatter(40.42848, -104.59066, 300, 'y', 'filled'); % Cattle
+geoscatter(40.4849, -104.5431667, 300, 'g', 'filled'); % Dairy
+geoscatter(40.49397, -104.65371, 300, 'y', 'filled'); % Cattle
+geoscatter(40.4951, -104.5834, 300, 'y', 'filled'); % Cattle
+geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Cattle
+% Map limits
+geolimits([40.35 40.55],[-104.7 -104.4])
+set(gca, 'FontSize', 20)
+geobasemap(basemaps)
+colormap(flipud(mycolormap))
+clim([0 200])
+c10 = colorbar;
+c10.Label.String = 'NH_3 (ppbv)';
 
 
 
