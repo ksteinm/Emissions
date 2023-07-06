@@ -275,7 +275,7 @@ figure
 geoscatter(ONG_lat, ONG_lon, 30, 'k', 'filled');
 hold on
 geoscatter(AVlat(s_fiverivers:e_fiverivers), AVlon(s_fiverivers:e_fiverivers), 60, NH3(s_fiverivers:e_fiverivers), 'filled');
-geoscatter(40.3769, -104.511, 2000, 'p', 'y', 'filled'); % Target feedlot
+geoscatter(40.3769, -104.511, 2000, 'p','y','filled'); % Target feedlot
 geoscatter(40.44983, -104.48439, 300, 'g', 'filled'); % Dairy; Purple color
 geoscatter(40.428269, -104.51102, 300, 'y', 'filled'); % Cattle
 geoscatter(40.369655, -104.545259, 300, 'y', 'filled'); % Cattle
@@ -295,9 +295,9 @@ c8.Label.String = 'NH_3 (ppbv)';
 
 figure
 % Plotting oil and gas locations
-geoscatter(ONG_lat, ONG_lon, 70, 'k', 'filled');
+geoscatter(ONG_lat,ONG_lon,70,'k','filled');
 hold on
-geoscatter(AVlat(s_Producers:e_Producers), AVlon(s_Producers:e_Producers), 60, CH4_ppb(s_Producers:e_Producers), 'filled');
+geoscatter(AVlat(s_Producers:e_Producers),AVlon(s_Producers:e_Producers),60,CH4_ppb(s_Producers:e_Producers),'filled');
 geoscatter(40.435182, -104.601597, 2000, 'p', 'y', 'filled') % Target feedlot
 geoscatter(40.492649, -104.522827, 300, 'g', 'filled'); % Dairy
 geoscatter(40.42848, -104.59066, 300, 'y', 'filled'); % Cattle
@@ -319,9 +319,9 @@ c9.Label.String = 'CH_4 (ppbv)';
 
 figure
 % Plotting oil and gas locations
-geoscatter(ONG_lat, ONG_lon, 70,' k', 'filled');
+geoscatter(ONG_lat,ONG_lon,70,'k','filled');
 hold on
-geoscatter(AVlat(s_Producers:e_Producers), AVlon(s_Producers:e_Producers), 60, NH3(s_Producers:e_Producers), 'filled');
+geoscatter(AVlat(s_Producers:e_Producers),AVlon(s_Producers:e_Producers),60,NH3(s_Producers:e_Producers),'filled');
 geoscatter(40.435182, -104.601597, 2000, 'p', 'y', 'filled') % Target feedlot
 geoscatter(40.492649, -104.522827, 300, 'g', 'filled'); % Dairy
 geoscatter(40.42848, -104.59066, 300, 'y', 'filled'); % Cattle
@@ -337,3 +337,10 @@ colormap(flipud(mycolormap))
 clim([0 200])
 c10 = colorbar;
 c10.Label.String = 'NH_3 (ppbv)';
+
+
+
+
+
+
+
